@@ -1,0 +1,40 @@
+{
+  "title": "Contact Us",
+  "description": "Fill out the form below and we will get back to you.",
+  "fields": [
+    {
+      "name": "full_name",
+      "type": "text",
+      "label": "Full Name",
+      "placeholder": "Jane Doe",
+      "required": true
+    },
+    {
+      "name": "email",
+      "type": "email",
+      "label": "Email Address",
+      "placeholder": "jane@example.com",
+      "required": true
+    },
+    {
+      "name": "subject",
+      "type": "select",
+      "label": "Subject",
+      "required": true,
+      "options": ["General Inquiry", "Support", "Billing", "Other"]
+    },
+    {
+      "name": "message",
+      "type": "textarea",
+      "label": "Message",
+      "placeholder": "Write your message here...",
+      "required": true
+    },
+    {
+      "name": "subscribe",
+      "type": "checkbox",
+      "label": "Subscribe to our newsletter",
+      "required": false
+    }
+  ]
+}
