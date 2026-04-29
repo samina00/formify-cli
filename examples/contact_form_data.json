@@ -1,0 +1,8 @@
+{
+  "_comment": "Sample form submission data matching examples/contact_form.json",
+  "name": "Jane Doe",
+  "email": "jane.doe@example.com",
+  "subject": "General Inquiry",
+  "message": "Hello, I would like to get more information about your services.",
+  "subscribe": "on"
+}
