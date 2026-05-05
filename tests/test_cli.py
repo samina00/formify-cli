@@ -67,3 +67,10 @@ def test_validate_output_contains_field_name(schema_file: Path, invalid_data_fil
     main(["validate", str(schema_file), str(invalid_data_file)])
     captured = capsys.readouterr()
     assert "name" in captured.out or "email" in captured.out
+
+
+def test_validate_valid_data_produces_no_errors(schema_file: Path, valid_data_file: Path, capsys):
+    """Ensure that validating correct data produces no error output."""
+    main(["validate", str(schema_file), str(valid_data_file)])
+    captured = capsys.readouterr()
+    assert captured.err == ""
