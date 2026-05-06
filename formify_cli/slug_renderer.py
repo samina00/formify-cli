@@ -7,6 +7,14 @@ class SlugRenderError(Exception):
     """Raised when slug-based attribute rendering fails."""
 
 
+def _validate_field(field: object) -> None:
+    """Raise SlugRenderError if *field* is not a dict containing a 'name' key."""
+    if not isinstance(field, dict):
+        raise SlugRenderError("field must be a dict.")
+    if "name" not in field:
+        raise SlugRenderError("field must contain a 'name' key.")
+
+
 def field_id(field: dict, separator: str = "-") -> str:
     """Return a slug suitable for use as an HTML id attribute.
 
@@ -20,10 +28,7 @@ def field_id(field: dict, separator: str = "-") -> str:
     Raises:
         SlugRenderError: If the field is invalid or slugification fails.
     """
-    if not isinstance(field, dict):
-        raise SlugRenderError("field must be a dict.")
-    if "name" not in field:
-        raise SlugRenderError("field must contain a 'name' key.")
+    _validate_field(field)
     try:
         return "field-" + slugify(field["name"], separator)
     except SchemaSlugifierError as exc:
@@ -44,10 +49,7 @@ def field_css_class(field: dict, prefix: str = "form-field", separator: str = "-
     Raises:
         SlugRenderError: If the field is invalid.
     """
-    if not isinstance(field, dict):
-        raise SlugRenderError("field must be a dict.")
-    if "name" not in field:
-        raise SlugRenderError("field must contain a 'name' key.")
+    _validate_field(field)
     try:
         slug = slugify(field["name"], separator)
     except SchemaSlugifierError as exc:
