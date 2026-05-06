@@ -103,6 +103,13 @@ def test_filter_fields_multiple_criteria(schema):
     assert result[0]["name"] == "country"
 
 
-def test_filter_fields_no_match_returns_empty(schema):
-    result = filter_fields(schema, type="file")
-    assert result == []
+def test_filter_fields_no_criteria_returns_all_fields(schema):
+    """Calling filter_fields with no keyword arguments should return all fields."""
+    result = filter_fields(schema)
+    assert len(result) == 4
+
+
+def test_filter_fields_raises_for_non_dict_schema():
+    """filter_fields should raise SchemaSearchError when schema is not a dict."""
+    with pytest.raises(SchemaSearchError):
+        filter_fields(["not", "a", "dict"], required=True)
