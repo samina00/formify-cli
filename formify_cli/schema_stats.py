@@ -53,6 +53,22 @@ def list_unknown_types(schema: dict) -> list[str]:
     )
 
 
+def list_fields_without_label(schema: dict) -> list[str]:
+    """Return a list of field names that are missing a non-empty label.
+
+    Fields without a ``name`` key are identified by their index (e.g.
+    ``"<field 2>"``) so callers can locate them easily.
+    """
+    _check_schema(schema)
+    missing: list[str] = []
+    for i, field in enumerate(schema["fields"]):
+        label = field.get("label", "")
+        if not isinstance(label, str) or not label.strip():
+            identifier = field.get("name") or f"<field {i}>"
+            missing.append(str(identifier))
+    return missing
+
+
 def compute_stats(schema: dict) -> dict:
     """Return a full statistics dict for the schema."""
     _check_schema(schema)
